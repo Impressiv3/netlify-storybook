@@ -9,7 +9,7 @@ export default function SampleComponent({ title, onClick, children }) {
       <p>(this is a sample component)</p>
       {children}
       <button type="button" onClick={onClick}>
-        Click me
+        Fuck off
       </button>
     </div>
   );
