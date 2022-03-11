@@ -3,33 +3,18 @@ import PropTypes from 'prop-types';
 import './ShoppingCart.styles.css';
 
 function RemoveFromShoppingCart(props) {
-
+  const { product, shoppingCart, setShoppingCart } = props;
 
   const removeProductFromShoppingCart = () => {
-    props.setShoppingCart((prev) => prev.filter((item) => item.id !== props.product.id));
-    const result = props.shoppingCart.find(({ id }) => id === props.product.id);
+    
+    setShoppingCart((prev) => prev.filter((item) => item.id !== product.id));
+    const result = shoppingCart.find(({ id }) => id === product.id);
     if (result !== undefined) {
-      const index = props.shoppingCart.indexOf(result);
+      
+      const index = shoppingCart.indexOf(result);
       if (index > -1) {
-        props.shoppingCart.splice(index, 1);
-
-        const totalPriceOfProducts = props.shoppingCart.reduce(
-          (sum, item) => sum + item.quantity * item.price,
-          0,
-        );
-        props.setTotalPrice(totalPriceOfProducts);
-
-        const totalDiscountOfProducts = props.shoppingCart.reduce(
-          (sum, item) =>
-            sum +
-            Math.round((item.discount * (item.quantity * item.price)) / 100),
-          0,
-        );
-        props.setTotalDiscount(totalDiscountOfProducts);
-
-        const totalAmountToBePayed =
-          totalPriceOfProducts - totalDiscountOfProducts;
-        props.setTotalPayment(totalAmountToBePayed);
+        shoppingCart.splice(index, 1);
+        
       }
     }
   };
@@ -48,30 +33,30 @@ function RemoveFromShoppingCart(props) {
       <div className="discounted_price">
         <div
           style={{
-            display: props.product.discount !== 0 ? 'inline-block' : 'none',
+            display: product.discount !== 0 ? 'inline-block' : 'none',
             textDecoration: 'line-through',
             color: 'black',
           }}
         >
-          {props.product.currency} {props.product.price}
+          {product.currency} {product.price}
         </div>
         <div
           style={{
-            display: props.product.discount === 0 ? 'inline-block' : 'none',
+            display: product.discount === 0 ? 'inline-block' : 'none',
             color: 'black',
           }}
         >
-          {props.product.currency} {props.product.price}
+          {product.currency} {product.price}
         </div>
         <div
           style={{
-            display: props.product.discount !== 0 ? 'inline-block' : 'none',
+            display: product.discount !== 0 ? 'inline-block' : 'none',
             color: 'black',
           }}
         >
-          <span className="currency-field">{props.product.currency}</span>
+          <span className='currency-field'>{product.currency}</span>
 
-          {Math.round(props.product.price * (1 - props.product.discount / 100))}
+          {Math.round(product.price * (1 - product.discount / 100))}
         </div>
       </div>
     </div>
@@ -88,12 +73,8 @@ RemoveFromShoppingCart.propTypes = {
   }).isRequired,
   shoppingCart: PropTypes.arrayOf(PropTypes.object).isRequired,
   setShoppingCart: PropTypes.arrayOf(PropTypes.object).isRequired,
-  
-  setTotalPrice: PropTypes.func.isRequired,
-  
-  setTotalDiscount: PropTypes.func.isRequired,
-  
-  setTotalPayment: PropTypes.func.isRequired, 
 };
+
+
 
 export default RemoveFromShoppingCart;

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 import './CreateAccountForm.styles.css';
 
-export default function CreateAccount({ onSubmit }) {
+export default function CreateAccount() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -29,17 +28,17 @@ export default function CreateAccount({ onSubmit }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit({
+    const newUser = {
       email,
       password,
-      passwordConfirm,
       fullName,
       mobile,
       address,
       city,
       country,
       zipCode,
-    });
+    };
+    console.log(newUser);
   };
 
   return (
@@ -88,11 +87,7 @@ export default function CreateAccount({ onSubmit }) {
               icon={confirmPasswordVisible ? faEye : faEyeSlash}
             />
           </div>
-          {!passwordMatch && passwordConfirm && (
-            <p style={{ color: 'red', fontSize: '12px' }}>
-              Passowrd needs to match
-            </p>
-          )}
+          {(!passwordMatch && passwordConfirm) && <p style={{color:"red", fontSize: "12px"}}>Passowrd needs to match</p>}
         </label>
       </div>
       <div className="create-account-container">
@@ -151,7 +146,7 @@ export default function CreateAccount({ onSubmit }) {
         <label htmlFor="zipcode">
           Zip-code
           <input
-            type="number"
+            type="text"
             name="zipcode"
             value={zipCode}
             onChange={(event) => setZipCode(event.target.value)}
@@ -170,6 +165,3 @@ export default function CreateAccount({ onSubmit }) {
   );
 }
 
-CreateAccount.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};

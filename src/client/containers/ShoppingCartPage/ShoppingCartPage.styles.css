@@ -1,12 +1,14 @@
-
+div {
+  color: #687808;
+}
 
 .shop-cart {
-  margin: 50px auto;
-  padding: 0 30px;
-   width:auto; 
+  margin: 50px;
+  padding: 0;
+  width: 40%;
 }
 .heading {
-  text-align: center
+  text-align: center;
 }
 .empty-shop-cart {
   font-size: large;
@@ -14,6 +16,6 @@
   margin: 50px;
   margin-left: 550px;
   padding: 0;
-  width: auto;
+  width: 40%;
   color: black;
 }

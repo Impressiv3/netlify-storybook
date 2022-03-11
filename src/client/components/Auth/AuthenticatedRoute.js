@@ -3,14 +3,9 @@ import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
 import { useAuthentication } from '../../hooks/useAuthentication';
-import Loader from '../Loader/Loader.component';
 
 function AuthenticatedRoute({ children, ...rest }) {
-  const { isAuthenticated, isLoading } = useAuthentication();
-
-  if (isLoading) {
-    return <Loader />;
-  }
+  const { isAuthenticated } = useAuthentication();
 
   return (
     <Route
@@ -22,7 +17,7 @@ function AuthenticatedRoute({ children, ...rest }) {
         ) : (
           <Redirect
             to={{
-              pathname: '/login',
+              pathname: '/sign-in',
               state: { from: location },
             }}
           />
